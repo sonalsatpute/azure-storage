@@ -1,12 +1,20 @@
 ﻿using System;
+using System.IO;
+using Microsoft.Extensions.Configuration;
 
 namespace AzureStorage
 {
-    class Program
+  class Program
+  {
+    static void Main(string[] args)
     {
-        static void Main(string[] args)
-        {
-            Console.WriteLine("Hello World!");
-        }
+      var builder = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("config.json");
+
+      IConfigurationRoot Configuration = builder.Build();
+
+      Console.WriteLine(Configuration["StorageConnectionString"]);
     }
+  }
 }
