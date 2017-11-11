@@ -14,7 +14,13 @@ namespace AzureStorage
 
       IConfigurationRoot Configuration = builder.Build();
 
-      Console.WriteLine(Configuration["StorageConnectionString"]);
+      string storageAccountName = Configuration["StorageAccountName"];
+      string storageAccountKey = Configuration["StorageAccountKey"];
+      BlobStorage blobStorage = new BlobStorage(storageAccountName, storageAccountKey);
+      blobStorage.CreateContainer("new-container");
+
+      Console.WriteLine("Press any key to exit.");
+      Console.Read();
     }
   }
 }

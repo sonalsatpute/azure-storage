@@ -1,3 +1,4 @@
 ﻿{
-  "StorageConnectionString" :  "this is connection string!"
+  "StorageAccountName": "sonalstorageacc",
+  "StorageAccountKey": "wNPdLkFmrynZgvP3isbzRsEoWijrlYq+BVTt8rNXBcYhxnvZ6inDdta1xNIAQQihWaLL0qO1T5ujoyH1ZID0cA=="
 }
