@@ -24,6 +24,8 @@ namespace AzureStorage
       container.UploadBlob("532_OD_Changes.pdf");
       container.CopyBlob("532_OD_Changes.pdf", "Copy_Of_532_OD_Changes.pdf");
       container.UploadBlobSubdirectory("532_OD_Changes.pdf");
+      container.CreateSharedAccessPolicy();
+      //container.CreateCORSPolicy();
 
       Console.WriteLine("Press any key to exit.");
       Console.Read();

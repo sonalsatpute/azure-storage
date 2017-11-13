@@ -1,7 +1,9 @@
 ﻿using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Auth;
 using Microsoft.WindowsAzure.Storage.Blob;
+using Microsoft.WindowsAzure.Storage.Shared.Protocol;
 using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace AzureStorage
@@ -86,5 +88,39 @@ namespace AzureStorage
       }
 
     }
+
+    public void CreateSharedAccessPolicy()
+    {
+      //Create a new stored access policy and define its constraints.
+      SharedAccessBlobPolicy sharedPolicy = new SharedAccessBlobPolicy()
+      {
+        SharedAccessExpiryTime = DateTime.UtcNow.AddHours(24),
+        Permissions = SharedAccessBlobPermissions.Read | SharedAccessBlobPermissions.Write | SharedAccessBlobPermissions.List
+      };
+
+      //Get the container's existing permissions.
+      BlobContainerPermissions permissions = new BlobContainerPermissions();
+
+      //Add the new policy to the container's permissions.
+      permissions.SharedAccessPolicies.Clear();
+      permissions.SharedAccessPolicies.Add("PolicyName", sharedPolicy);
+      _container.SetPermissionsAsync(permissions);
+    }
+
+    //public void CreateCORSPolicy()
+    //{
+    //  ServiceProperties sp = new ServiceProperties();
+    //  sp.Cors.CorsRules.Add(new CorsRule()
+    //  {
+    //    AllowedMethods = CorsHttpMethods.Get,
+    //    AllowedOrigins = new List<string>() { "http://localhost:8080/" },
+    //    MaxAgeInSeconds = 3600,
+    //  });
+    //  _container.ServiceClient.SetServicePropertiesAsync(sp);
+
+    //  //CloudBlobClient blobClient;
+    //  //blobClient.SetServicePropertiesAsync(sp);
+    //}
+
   }
 }
